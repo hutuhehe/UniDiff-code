@@ -1,0 +1,54 @@
+{
+    "exp_dir": "exp_result/Berlin_pretrained/no_mixup",
+    "model_type": "ddpm",
+    "category": "Berlin",
+    "seed": 21,
+    "number_class": 8,
+    "ignore_label": 0,
+    "bands_num": 244,
+    "training_path": "datasets/Berlin_benchmark/Berlin_SAR_PCA_RGB_train",
+    "testing_path": "datasets/Berlin_benchmark/Berlin_SAR_PCA_RGB_test",
+    "train_data_pt_folder": "datasets/Berlin_benchmark/",
+    "test_label_path": "datasets/Berlin_benchmark/test_label_berlin.npy",
+    "model_path": "checkpoints/ddpm/64x64_diffusion.pt",
+    "dim": [
+        64,
+        64,
+        384
+    ],
+    "steps": [
+        300
+    ],
+    "blocks": [11
+    ],
+    "use_modalities": [0],
+    
+  "channel_groups": [
+        [15, 30, 40]
+     ],
+    "feature_dims":[768],
+    "projection_dim": 384,
+    "layer_dim_out":[768,768,768,576,576,576,576,384,384,384,384,192],
+    "layer_dim_in":[1536,1536,1344,1344,1152,1152,960,960,768,768,576,576],
+    "model_num": 1,
+    "batch_size": 64,
+    "max_training": 30,
+    "learning_rate": 0.001,
+    "max_epoch": 8,
+    "model_name": "pixelclassfier",
+    "mix_up_alpha": 0.2,
+    "use_mixup":false,
+     "voting_type": "soft",
+    "lam_spatial_weight": 0.5,
+    "lam_spectral_weight": 0.5,
+    "training_number": 742,
+    "testing_number": 742,
+    "deeplab_res": 64,
+    "upsample_mode": "bilinear",
+    "share_noise": true,
+    "input_activations": false,
+    "img_width_orig": 476,
+    "img_height_orig": 1723,
+    "img_width_adjusted": 480,
+    "img_height_adjusted": 1728
+}
