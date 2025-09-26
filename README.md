@@ -1,116 +1,116 @@
 # UniDiff-MM: Parameter-Efficient Diffusion for Multimodal Remote Sensing
 
-This repository contains the implementation of **UniDiff-MM** (WACV 2026 submission).  
-UniDiff-MM adapts pretrained diffusion backbones for multimodal remote-sensing (HSI + SAR) using a parameter-efficient framework with joint timestep–modality conditioning.
+## Data
 
----
+We evaluate our approach on two hyperspectral image (HSI) datasets: **Augsburg** and **Berlin**.  
+Both datasets can be downloaded from the [ISPRS S2FL repository](https://github.com/danfenghong/ISPRS_S2FL).
 
-## 🔧 Environment Setup
+### 1) Dataset Setup
 
-Install the environment with pip:
+**Datasets:** ISPRS S2FL — Berlin and Augsburg  
+**Download:** https://github.com/danfenghong/ISPRS_S2FL
 
-```bash
-python -m venv diffusion_env
-source diffusion_env/bin/activate      # Linux/Mac
-# OR
-.\diffusion_env\Scripts\activate       # Windows
+**Tiling Configuration:**  
+We divide each HSI cube and SAR image into **64×64 patches**.  
+- **Default:** `stride = 32` → 50% overlap  
+- **Non-overlapping:** `stride = 64`
 
-pip install -r requirements.txt
+**Preprocessing Notebooks:**
+- [`hyperspectral_snip_Berlin.ipynb`](./hyperspectral_snip_Berlin.ipynb)  
+- [`hyperspectral_snip_Augsburg.ipynb`](./hyperspectral_snip_Augsburg.ipynb)  
+
+These notebooks handle:  
+- Loading HSI + SAR data cubes  
+- Splitting into 64×64 patches (with specified stride)  
+- Saving processed data under `datasets/` directory
+
+**Directory Structure:**
+```
+datasets/
+├── Augsburg_benchmark/
+│   ├── Augsburg_data_32/          # Stage A (unlabeled adaptation)
+│   ├── Augsburg_train_data_32/    # Stage B (labeled training)
+│   ├── Augsburg_test_data_32/     # Stage B (test tiles)
+│   └── test_label_Augsburg.npy    # Stage B (test labels)
+└── Berlin_benchmark/
+    ├── Berlin_data_32/            # Stage A (unlabeled adaptation)
+    ├── Berlin_train_data_32/      # Stage B (labeled training)
+    ├── Berlin_test_data_32/       # Stage B (test tiles)
+    └── test_label_Berlin.npy      # Stage B (test labels)
 ```
 
+### 2) Pre-trained Model
 
----
+We use the **64×64 ImageNet-pretrained diffusion model** from OpenAI's [guided-diffusion repository](https://github.com/openai/guided-diffusion).
 
-## 📂 Data Preparation
-
-We use two multimodal datasets: **Berlin** and **Augsburg**.
-
-### 1. Download
-- [Berlin dataset](https://rslab.utdallas.edu/data/berlin-hsi-sar)  
-- [Augsburg dataset](https://rslab.utdallas.edu/data/augsburg-hsi-sar)
+**Required Checkpoint:**
+- Download: [`64x64_diffusion.pt`](https://github.com/openai/guided-diffusion)
+- **Placement:** `checkpoints/ddpm/64x64_diffusion.pt`
 
 
 
+### 3) Dataset Configurations
 
-### 2. Organize
-Place raw data under:
-```
-project_root/
-├── data/
-│   ├── berlin_raw/
-│   │   ├── HSI_Berlin.tif
-│   │   └── SAR_Berlin.tif
-│   └── augsburg_raw/
-│       ├── HSI_Augsburg.tif
-│       └── SAR_Augsburg.tif
-```
+We provide JSON configuration files for different experimental setups:
 
-### 3. Preprocess into patches
-Run the provided Jupyter notebooks:
-
-- `hyperspectral snip Berlin.ipynb`  
-- `hyperspectral snip Augsburg.ipynb`
-
-Each notebook:
-- Loads HSI + SAR cubes  
-- Splits into **64×64 patches** with **stride 32**  
-- Saves patches under `exp_set/`:
-
+**Configuration Files:**
 ```
 exp_set/
-├── berlin/
-│   ├── HSI_patches/
-│   ├── SAR_patches/
-│   └── labels/
-└── augsburg/
-    ├── HSI_patches/
-    ├── SAR_patches/
-    └── labels/
+├── Augsburg/
+│   ├── dataset_hsi.json          # HSI-only modality
+│   ├── dataset_hsi_sar.json      # HSI + SAR multimodal
+│   └── dataset_pretrain.json     # Pretraining setup
+└── Berlin/
+    ├── dataset_hsi.json          # HSI-only modality
+    ├── dataset_hsi_sar.json      # HSI + SAR multimodal
+    └── dataset_pretrain.json     # Pretraining setup
 ```
 
----
+**Configuration Types:**
+- **`dataset_hsi.json`** → HSI-only modality experiments
+- **`dataset_hsi_sar.json`** → HSI + SAR multimodal experiments  
+- **`dataset_pretrain.json`** → Pretraining configuration
 
-## ⚙️ Dataset Configurations
+## Training Pipeline
 
-We provide JSON configs in `exp_set/`:
+*Alternatively, you can use the `stageA_B.ipynb` notebook for streamlined training.*
 
-- `dataset_hsi.json` → HSI-only patches  
-- `dataset_hsi_sar.json` → HSI + SAR fusion patches  
-- `dataset_pretrain.json` → Pretraining setup  
+### 4) Stage A — Adaptation (Unlabeled)
 
----
+This stage uses only image tiles (**no labels**) for domain adaptation.
 
-## 🚀 Training & Evaluation
-
-### Stage A: Adaptation
-Example (HSI-only, Berlin):
+**Example Training Command (Augsburg):**
 ```bash
-python train_adapt.py --dataset_config exp_set/dataset_hsi.json
+# Set up paths and flags
+DATA_DIR="datasets/Augsburg_benchmark/Augsburg_data_32"  # unlabeled tiles
+LOGDIR="runs/adapt/augsburg64"
+
+MODEL_FLAGS="--attention_resolutions 32,16,8 --class_cond False --diffusion_steps 1000 \
+             --dropout 0.1 --image_size 64 --learn_sigma True --noise_schedule cosine \
+             --num_channels 192 --num_head_channels 64 --num_res_blocks 3 --resblock_updown True \
+             --use_new_attention_order True --use_fp16 True --use_scale_shift_norm True"
+
+TRAIN_FLAGS="--lr 1e-4 --batch_size 32"
+
+# Run adaptation training (saves model every 2000 steps)
+python image_train.py --data_dir $DATA_DIR $MODEL_FLAGS $TRAIN_FLAGS
 ```
 
-HSI + SAR fusion:
+
+### 5) Stage B — Classification Training and Inference
+
+This stage uses labeled data for supervised classification training.
+
+**Example Training Command (Berlin with HSI+SAR):**
 ```bash
-python train_adapt.py --dataset_config exp_set/dataset_hsi_sar.json
+# Model flags for classification (note: class_cond True)
+MODEL_FLAGS="--attention_resolutions 32,16,8 --class_cond True --diffusion_steps 1000 \
+             --dropout 0.1 --image_size 64 --learn_sigma True --noise_schedule cosine \
+             --num_channels 192 --num_head_channels 64 --num_res_blocks 3 --resblock_updown True \
+             --use_new_attention_order True --use_fp16 True --use_scale_shift_norm True"
+
+# Run classification training with JSON config
+python train_hsi_sar.py --exp exp_set/Berlin_benchmark/datasetDDPM_hsi_sar.json $MODEL_FLAGS
 ```
-
-### Stage B: Classification
-Example (Berlin):
-```bash
-python train_cls.py --dataset_config exp_set/dataset_hsi_sar.json
-```
-
-### Pretraining
-```bash
-python train_pretrain.py --dataset_config exp_set/dataset_pretrain.json
-```
-
-### Evaluation
-```bash
-python evaluate.py --dataset berlin --checkpoint checkpoints/berlin_best.pth
-```
-
----
-
-
 
 

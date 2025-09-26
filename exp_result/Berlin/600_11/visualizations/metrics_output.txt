@@ -1,0 +1,14 @@
+Per-Class Metrics:
+Forest -  Recall: 0.7545, Precision: 0.8797, F1 Score: 0.8123, IoU: 0.6839
+Residential Area -  Recall: 0.7875, Precision: 0.9390, F1 Score: 0.8566, IoU: 0.7492
+Industrial Area -  Recall: 0.5736, Precision: 0.4625, F1 Score: 0.5121, IoU: 0.3442
+Low Plants -  Recall: 0.7778, Precision: 0.7353, F1 Score: 0.7559, IoU: 0.6076
+Soil -  Recall: 0.9119, Precision: 0.6792, F1 Score: 0.7786, IoU: 0.6374
+Allotment -  Recall: 0.5958, Precision: 0.1688, F1 Score: 0.2631, IoU: 0.1515
+Commercial Area -  Recall: 0.4495, Precision: 0.3749, F1 Score: 0.4088, IoU: 0.2569
+Water -  Recall: 0.7179, Precision: 0.7943, F1 Score: 0.7542, IoU: 0.6054
+Overall Accuracy: 0.7538
+AA: 0.6961
+Kappa Coefficient: 0.6367
+Mean IoU: 0.5045
+Mean F1 Score: 0.6427

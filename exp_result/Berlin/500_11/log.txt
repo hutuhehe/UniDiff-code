@@ -1,0 +1,85 @@
+Logging to exp_result/Berlin/sar_rgb_pca/model_2000/no_mixup/rgb_pca_sar\500_11
+Preparing the train set for Berlin with learning rate 0.001, [11] layers, [500] timesteps, batch size 64, training path: datasets/Berlin_benchmark/Berlin_SAR_PCA_RGB_train, testing path: datasets/Berlin_benchmark/Berlin_SAR_PCA_RGB_test, input activations: False, model path: checkpoints/Berlin_sar_pca_rgb/model002000.pt, max epochs: 8, mix_up_alpha: 0.2, use_mixup: False, voting method: soft.use_modalities: [0, 1, 2].
+Using 548140 samples (30.0%) from test_data as validation dataset.
+CKA (train):
+Modality Pair  i  j    CKA
+      rgb_pca  0  1 0.6154
+      rgb_sar  0  2 0.3705
+      pca_sar  1  2 0.3289
+Epoch: 0, Iteration: 30, Train Loss: 0.3536, Train Accuracy: 91.0934
+Epoch: 0, Iteration: 60, Train Loss: 0.1851, Train Accuracy: 97.0918
+Epoch: 0, Iteration: 90, Train Loss: 0.1480, Train Accuracy: 98.7265
+Epoch: 0, Iteration: 120, Train Loss: 0.0955, Train Accuracy: 99.2233
+Epoch: 0, Iteration: 150, Train Loss: 0.0686, Train Accuracy: 99.4916
+Epoch: 1, Iteration: 180, Train Loss: 0.0816, Train Accuracy: 99.7020
+Epoch: 1, Iteration: 210, Train Loss: 0.0719, Train Accuracy: 99.8555
+Epoch: 1, Iteration: 240, Train Loss: 0.0929, Train Accuracy: 99.8465
+Epoch: 1, Iteration: 270, Train Loss: 0.1263, Train Accuracy: 99.8736
+Epoch: 1, Iteration: 300, Train Loss: 0.1157, Train Accuracy: 99.9097
+Epoch: 1, Iteration: 330, Train Loss: 0.1339, Train Accuracy: 99.8736
+Epoch: 2, Iteration: 360, Train Loss: 0.0113, Train Accuracy: 99.9819
+Epoch: 2, Iteration: 390, Train Loss: 0.0174, Train Accuracy: 99.9277
+Epoch: 2, Iteration: 420, Train Loss: 0.0299, Train Accuracy: 99.9368
+Epoch: 2, Iteration: 450, Train Loss: 0.0985, Train Accuracy: 99.9277
+Epoch: 2, Iteration: 480, Train Loss: 0.1571, Train Accuracy: 99.9368
+Epoch: 2, Iteration: 510, Train Loss: 0.1293, Train Accuracy: 99.9277
+Epoch: 3, Iteration: 540, Train Loss: 0.1730, Train Accuracy: 99.9161
+Epoch: 3, Iteration: 570, Train Loss: 0.0072, Train Accuracy: 99.9639
+Epoch: 3, Iteration: 600, Train Loss: 0.0172, Train Accuracy: 99.9368
+Epoch: 3, Iteration: 630, Train Loss: 0.0340, Train Accuracy: 99.9277
+Epoch: 3, Iteration: 660, Train Loss: 0.0974, Train Accuracy: 99.9729
+Epoch: 3, Iteration: 690, Train Loss: 0.1218, Train Accuracy: 99.9458
+Epoch: 4, Iteration: 720, Train Loss: 0.1412, Train Accuracy: 99.9277
+Epoch: 4, Iteration: 750, Train Loss: 0.0540, Train Accuracy: 99.9458
+Epoch: 4, Iteration: 780, Train Loss: 0.0584, Train Accuracy: 99.9458
+Epoch: 4, Iteration: 810, Train Loss: 0.0527, Train Accuracy: 99.9548
+Epoch: 4, Iteration: 840, Train Loss: 0.0251, Train Accuracy: 99.9277
+Epoch: 5, Iteration: 870, Train Loss: 0.0074, Train Accuracy: 99.9729
+Epoch: 5, Iteration: 900, Train Loss: 0.0228, Train Accuracy: 99.9729
+Epoch: 5, Iteration: 930, Train Loss: 0.0602, Train Accuracy: 99.9458
+Epoch: 5, Iteration: 960, Train Loss: 0.0968, Train Accuracy: 99.9368
+Epoch: 5, Iteration: 990, Train Loss: 0.0130, Train Accuracy: 99.9368
+Epoch: 5, Iteration: 1020, Train Loss: 0.2094, Train Accuracy: 93.7990
+Epoch: 6, Iteration: 1050, Train Loss: 0.1536, Train Accuracy: 97.7756
+Epoch: 6, Iteration: 1080, Train Loss: 0.1112, Train Accuracy: 99.2026
+Epoch: 6, Iteration: 1110, Train Loss: 0.0273, Train Accuracy: 99.7832
+Epoch: 6, Iteration: 1140, Train Loss: 0.0633, Train Accuracy: 99.7381
+Epoch: 6, Iteration: 1170, Train Loss: 0.1060, Train Accuracy: 99.8013
+Epoch: 6, Iteration: 1200, Train Loss: 0.1400, Train Accuracy: 99.8645
+Epoch: 7, Iteration: 1230, Train Loss: 0.0177, Train Accuracy: 99.9368
+Epoch: 7, Iteration: 1260, Train Loss: 0.0399, Train Accuracy: 99.7200
+Epoch: 7, Iteration: 1290, Train Loss: 0.0841, Train Accuracy: 99.9097
+Epoch: 7, Iteration: 1320, Train Loss: 0.1706, Train Accuracy: 99.8645
+Epoch: 7, Iteration: 1350, Train Loss: 0.1381, Train Accuracy: 99.6839
+Epoch: 7, Iteration: 1380, Train Loss: 0.1061, Train Accuracy: 99.4942
+Epoch: 8, Iteration: 1410, Train Loss: 0.1440, Train Accuracy: 99.6929
+Epoch: 8, Iteration: 1440, Train Loss: 0.1661, Train Accuracy: 99.8826
+Epoch: 8, Iteration: 1470, Train Loss: 0.0962, Train Accuracy: 99.9458
+Epoch: 8, Iteration: 1500, Train Loss: 0.0277, Train Accuracy: 99.8736
+Epoch: 8, Iteration: 1530, Train Loss: 0.0455, Train Accuracy: 99.9277
+Epoch: 9, Iteration: 1560, Train Loss: 0.1249, Train Accuracy: 99.7923
+Epoch: 9, Validation Loss: 1.2891, Validation Accuracy: 70.8779
+Best model saved as model_0.pth with validation loss: 1.2891
+Epoch: 9, Iteration: 1590, Train Loss: 0.1398, Train Accuracy: 99.8284
+Epoch: 9, Validation Loss: 1.3052, Validation Accuracy: 69.9972
+Epoch: 9, Iteration: 1620, Train Loss: 0.1584, Train Accuracy: 99.7923
+Epoch: 9, Validation Loss: 1.6755, Validation Accuracy: 60.3296
+Epoch: 9, Iteration: 1650, Train Loss: 0.1345, Train Accuracy: 99.8194
+Epoch: 9, Validation Loss: 1.3715, Validation Accuracy: 69.8241
+Epoch: 9, Iteration: 1680, Train Loss: 0.1268, Train Accuracy: 99.8916
+Epoch: 9, Validation Loss: 1.3290, Validation Accuracy: 69.8201
+Epoch: 9, Iteration: 1710, Train Loss: 0.0514, Train Accuracy: 99.8826
+Epoch: 9, Validation Loss: 1.3294, Validation Accuracy: 67.9439
+Epoch: 10, Iteration: 1740, Train Loss: 0.0416, Train Accuracy: 99.7200
+Epoch: 10, Validation Loss: 1.4429, Validation Accuracy: 66.2437
+Epoch: 10, Iteration: 1770, Train Loss: 0.0377, Train Accuracy: 99.8194
+Epoch: 10, Validation Loss: 1.2458, Validation Accuracy: 70.3689
+Epoch: 10, Iteration: 1800, Train Loss: 0.1103, Train Accuracy: 99.8013
+Epoch: 10, Validation Loss: 1.4177, Validation Accuracy: 67.1948
+Epoch: 10, Iteration: 1830, Train Loss: 0.1288, Train Accuracy: 99.4852
+Epoch: 10, Validation Loss: 1.5035, Validation Accuracy: 64.6414
+Epoch: 10, Iteration: 1860, Train Loss: 0.0535, Train Accuracy: 99.6207
+Epoch: 10, Validation Loss: 1.2741, Validation Accuracy: 67.8804
+Epoch: 10, Iteration: 1890, Train Loss: 0.0505, Train Accuracy: 99.7290
+Epoch: 10, Validation Loss: 1.4967, Validation Accuracy: 61.7667
+*************** Break, Total iters: 1890, at Epoch: 10 ***************
