@@ -13,7 +13,6 @@ Both datasets can be downloaded from the [ISPRS S2FL repository](https://github.
 **Tiling Configuration:**  
 We divide each HSI cube and SAR image into **64×64 patches**.  
 - **Default:** `stride = 32` → 50% overlap  
-- **Non-overlapping:** `stride = 64`
 
 **Preprocessing Notebooks:**
 - [`hyperspectral_snip_Berlin.ipynb`](./hyperspectral_snip_Berlin.ipynb)  
@@ -92,7 +91,7 @@ MODEL_FLAGS="--attention_resolutions 32,16,8 --class_cond False --diffusion_step
 
 TRAIN_FLAGS="--lr 1e-4 --batch_size 32"
 
-# Run adaptation training (saves model every 2000 steps)
+# Run adaptation training  (saving the model every 2000 steps as adapted checkpoints)
 python image_train.py --data_dir $DATA_DIR $MODEL_FLAGS $TRAIN_FLAGS
 ```
 
