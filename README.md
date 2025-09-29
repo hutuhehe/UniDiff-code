@@ -113,3 +113,8 @@ python train_hsi_sar.py --exp exp_set/Berlin_benchmark/datasetDDPM_hsi_sar.json 
 ```
 
 
+## References
+
+- Nichol, A. Q., & Dhariwal, P. (2021). *Improved Denoising Diffusion Probabilistic Models*. NeurIPS. [arXiv:2102.09672](https://arxiv.org/abs/2102.09672)  
+- Baranchuk, D., Voynov, A., Rubachev, I., Khrulkov, V., & Babenko, A. (2022). *Label-Efficient Semantic Segmentation with Diffusion Models*. ICLR. [OpenReview](https://openreview.net/forum?id=SlxSY2UZQT)  
+- Hong, D., Yokoya, N., Ge, N., Chanussot, J., & Zhu, X. X. (2021). *Spectral–Spatial Foundation Learning: Benchmark Dataset for Hyperspectral and Multimodal Remote Sensing*. ISPRS Journal. [GitHub](https://github.com/danfenghong/ISPRS_S2FL)
